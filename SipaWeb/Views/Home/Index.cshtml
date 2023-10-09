@@ -1,0 +1,96 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Información de Lugares</title>
+    <style>
+        /* Estilo para las columnas y las imágenes */
+        .lugares-column, .info-column {
+            float: left;
+            width: 50%;
+            padding: 20px;
+        }
+
+        .imagen-lugar {
+            max-width: 100%;
+            display: block;
+            margin: 0 auto;
+            border: 2px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <!-- Columna de la lista de lugares -->
+    <div class="lugares-column">
+        <h2>Lista de Lugares</h2>
+        <ul id="lugares-list">
+            <!-- Aquí se agregarán los lugares dinámicamente -->
+        </ul>
+    </div>
+
+    <!-- Columna de información del lugar -->
+    <div class="info-column">
+        <h2>Información del Lugar</h2>
+        <div id="lugar-info">
+            <!-- Aquí se mostrará la información del lugar seleccionado -->
+        </div>
+    </div>
+
+    <script>
+        // Función para obtener datos de lugares desde el endpoint
+        function obtenerDatosLugares() {
+            fetch('https://localhost:44391/api/Lugares')
+                .then(response => response.json())
+                .then(data => {
+                    mostrarLugares(data); // Llama a la función para mostrar los lugares
+                })
+                .catch(error => console.error('Error al obtener los datos:', error));
+        }
+
+        // Función para mostrar los lugares
+        function mostrarLugares(lugares) {
+            var lugaresList = document.getElementById("lugares-list");
+
+            lugares.forEach(function (lugar) {
+                var listItem = document.createElement("li");
+                var link = document.createElement("a");
+                link.textContent = lugar.nombreLugar;
+                link.href = "#";
+                link.addEventListener("click", function () {
+                    mostrarInformacionLugar(lugar);
+                });
+                listItem.appendChild(link);
+                lugaresList.appendChild(listItem);
+            });
+        }
+
+        // Función para mostrar la información del lugar seleccionado
+        function mostrarInformacionLugar(lugar) {
+            var lugarInfo = document.getElementById("lugar-info");
+            lugarInfo.innerHTML = `
+                                        <h3>${lugar.nombreLugar}</h3>
+                                        <img class="imagen-lugar" src="${lugar.link}" alt="Imagen de ${lugar.nombreLugar}">
+                                        <p>${lugar.descripcion}</p>
+                                        <ul>
+                                            <li>Palabras Clave: ${lugar.palabrasClave}</li>
+                                            <li>Clima: ${lugar.clima}</li>
+                                        </ul>
+                                    `;
+        }
+
+        // Llama a la función para obtener datos de lugares al cargar la página
+        window.onload = function () {
+            obtenerDatosLugares(); // Consumir el endpoint de lugares
+        };
+    </script>
+</body>
+</html>
+
