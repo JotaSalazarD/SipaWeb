@@ -41,6 +41,11 @@ namespace SipaWeb.Controllers
             return View();
         }
 
+        public IActionResult ClientesDescripcion()
+        {
+            return View();
+        }
+
 
 
         [HttpPost]
@@ -84,6 +89,45 @@ namespace SipaWeb.Controllers
                     {
                         // La solicitud fue exitosa, puedes redirigir a una vista de confirmación
                      //   return RedirectToAction("Confirmacion");
+                    }
+                    else
+                    {
+                        // La solicitud no fue exitosa, maneja el error según sea necesario
+                        // Por ejemplo, muestra un mensaje de error al usuario
+                    }
+                }
+            }
+
+            // Si la validación falla, vuelve a mostrar el formulario con errores
+            return View(viewModel);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> ProcesarClienteDescripcion(Clientes viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                // Crear una nueva instancia de la entidad Clientes y asignar valores desde el ViewModel
+                var cliente = new Clientes
+                {
+                    Descripcion = viewModel.Descripcion,
+
+                };
+
+                // Realizar una solicitud POST para almacenar el cliente en el endpoint de la API
+                using (var httpClient = new HttpClient())
+                {
+                    // Especifica la URL del endpoint
+                    var apiUrl = "https://localhost:44391/api/Clientes";
+
+                    // Realiza la solicitud POST enviando el objeto cliente
+                    var response = await httpClient.PostAsJsonAsync(apiUrl, cliente);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        // La solicitud fue exitosa, puedes redirigir a una vista de confirmación
+                        //   return RedirectToAction("Confirmacion");
                     }
                     else
                     {
