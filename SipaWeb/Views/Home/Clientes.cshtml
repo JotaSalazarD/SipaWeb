@@ -9,146 +9,132 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.5/jquery.inputmask.min.js"></script>
 </head>
 <body>
-    <form asp-action="ProcesarFormulario" method="post">
-        <h2>Formulario de Clientes</h2>
-        <label for="CiudadOrigen">Ciudad de Origen:</label>
-        <input type="text" name="Ciudad" id="Ciudad">
-
-        <!-- Contenedor de sugerencias con estilos mejorados -->
-        <div id="sugerencias" class="sugerencias-container"></div>
-
-        <!-- Resto del formulario (igual que en los ejemplos anteriores) -->
-
-    <style>
-        .sugerencias-container {
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            position: absolute;
-            max-height: 150px;
-            overflow-y: auto;
-            z-index: 1;
-        }
-
-            .sugerencias-container div {
-                padding: 10px;
-                border-bottom: 1px solid #ccc;
-                cursor: pointer;
-            }
-
-                .sugerencias-container div:last-child {
-                    border-bottom: none;
-                }
-    </style>
-
-
-        <label for="Q2">Cuántos días de viaje?</label>
-        <input type="text" name="Dias" id="Dias">
-
-        <label for="Q3">Presupuesto</label>
-        <input type="text" name="Presupuesto" id="Presupuesto" class="currency-input">
-        
-
-
-
-        <label for="Q4">Cuántos adultos son?</label>
-        <select name="Adultos" id="Adultos">
-            <option value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-        </select>
-
-        <label for="Q5">Niños</label>
-        <select name="Ninos" id="Ninos">
-            <option value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-        </select>
-
-        <label for="Q6">Clima de preferencia</label>
-        <select name="Clima" id="Clima">
-            <option value="Sí">Sí</option>
-            <option value="No">No</option>
-        </select>
-
-
-        <label for="Q7">Intereses</label>
-        <div class="interests-container">
-            <div class="column">
-                <div class="checkbox-group">
-                    <input type="checkbox" name="InteresesSeleccionados[]" value="cultura" id="cultura">
-                    <label for="cultura">Cultura</label>
+    <div class="container">
+        <form asp-action="ProcesarFormulario" method="post">
+            <div class="row">
+                <div class="col-12">
+                    <h2>Formulario de Clientes</h2>
+                    <hr />
                 </div>
-                <div class="checkbox-group">
-                    <input type="checkbox" name="InteresesSeleccionados[]" value="negocios" id="negocios">
-                    <label for="negocios">Negocios</label>
+
+                <div class="col-12 col-md-6 form-floating mb-3">
+                        <input type="text" name="Ciudad" id="Ciudad" class="form-control" placeholder="Ciudad de origen">
+                        <label for="Ciudad">Ciudad de Origen:</label>
                 </div>
-                <div class="checkbox-group">
-                    <input type="checkbox" name="InteresesSeleccionados[]" value="gastronomia" id="gastronomia">
-                    <label for="gastronomia">Gastronomía</label>
+                <div class="col-12 col-md-6 form-floating mb-3">
+                    <input type="text" name="Dias" id="Dias" placeholder="Cuántos días de viaje?" class="form-control">
+                    <label for="Dias">Cuántos días de viaje?</label>
                 </div>
+                <div class="col-12 col-md-6 form-floating mb-3">
+                    <input type="text" name="Presupuesto" id="Presupuesto" class="form-control" placeholder="Presupuesto">
+                    <label for="Presupuesto">Presupuesto</label>
+                </div>
+              
+                <div class="col-12 col-md-6 form-floating mb-3">
+                    <select name="Adultos" id="Adultos" class="form-select">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    <label for="Adultos">Cuántos adultos son?</label>
+                </div>
+
+                <div class="col-12 col-md-6 form-floating mb-3">
+                    <select name="Ninos" id="Ninos" class="form-select">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    <label for="Ninos">Niños</label>
+                </div>
+                
+                <div class="col-12 col-md-6 form-floating mb-3">
+                    <select name="Clima" id="Clima" class="form-select">
+                        <option value="Sí">Sí</option>
+                        <option value="No">No</option>
+                    </select>
+                    <label for="Clima">Clima de preferencia</label>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <h3 for="Q7">Intereses</h3>
+                    <hr />
+                </div>
+                <div class="col-12">
+                     
+                     <div class="form-check form-check-inline">
+                        <input type="checkbox" name="InteresesSeleccionados[]" value="cultura" id="cultura" class="form-check-input">
+                        <label class="form-check-label" for="cultura">Cultura</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="checkbox" name="InteresesSeleccionados[]" value="negocios" id="negocios" class="form-check-input">
+                        <label for="negocios" class="form-check-label">Negocios</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="checkbox" name="InteresesSeleccionados[]" value="gastronomia" id="gastronomia" class="form-check-input">
+                        <label for="gastronomia"  class="form-check-label">Gastronomía</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="checkbox" name="InteresesSeleccionados[]" value="deportes" id="deportes"  class="form-check-input">
+                        <label for="deportes" class="form-check-label">Deportes</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                         <input type="checkbox" name="InteresesSeleccionados[]" value="naturaleza" id="naturaleza"  class="form-check-input">
+                        <label for="naturaleza" class="form-check-label">Naturaleza</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="checkbox" name="InteresesSeleccionados[]" value="familia" id="familia"  class="form-check-input">
+                        <label for="familia" class="form-check-label">Familia</label>
+                    </div>
+
+                </div>
+
+                <div class="col-12 mb-3">
+
+                    <div class="form-check form-check-inline">
+                        <input type="checkbox" name="InteresesSeleccionados[]" value="aventura" id="aventura"  class="form-check-input">
+                        <label for="aventura" class="form-check-label">Aventura</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="checkbox" name="InteresesSeleccionados[]" value="playa" id="playa"  class="form-check-input">
+                        <label for="playa">Playa</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="checkbox" name="InteresesSeleccionados[]" value="montaña" id="montaña"  class="form-check-input">
+                        <label for="montaña" class="form-check-label">Montaña</label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                        <input type="checkbox" name="InteresesSeleccionados[]" value="fiestas" id="fiestas"  class="form-check-input">
+                        <label for="fiestas" class="form-check-label">Fiestas</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="checkbox" name="InteresesSeleccionados[]" value="teatro" id="teatro"  class="form-check-input">
+                        <label for="teatro" class="form-check-label">Teatro</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="checkbox" name="InteresesSeleccionados[]" value="compras" id="compras"  class="form-check-input">
+                        <label for="compras" class="form-check-label">Compras</label>
+                    </div>
+               
             </div>
-            <div class="column">
-                <div class="checkbox-group">
-                    <input type="checkbox" name="InteresesSeleccionados[]" value="deportes" id="deportes">
-                    <label for="deportes">Deportes</label>
-                </div>
-                <div class="checkbox-group">
-                    <input type="checkbox" name="InteresesSeleccionados[]" value="naturaleza" id="naturaleza">
-                    <label for = "naturaleza">Naturaleza</label>
-                </div>
-                <div class="checkbox-group">
-                    <input type="checkbox" name="InteresesSeleccionados[]" value="familia" id="familia">
-                    <label for="familia">Familia</label>
-                </div>
-            </div>
-            <div class="column">
-                <div class="checkbox-group">
-                    <input type="checkbox" name="InteresesSeleccionados[]" value="aventura" id="aventura">
-                    <label for="aventura">Aventura</label>
-                </div>
-                <div class="checkbox-group">
-                    <input type="checkbox" name="InteresesSeleccionados[]" value="playa" id="playa">
-                    <label for="playa">Playa</label>
-                </div>
-                <div class="checkbox-group">
-                    <input type="checkbox" name="InteresesSeleccionados[]" value="montaña" id="montaña">
-                    <label for="montaña">Montaña</label>
-                </div>
-            </div>
-            <div class="column">
-                <div class="checkbox-group">
-                    <input type="checkbox" name="InteresesSeleccionados[]" value="fiestas" id="fiestas">
-                    <label for="fiestas">Fiestas</label>
-                </div>
-                <div class="checkbox-group">
-                    <input type="checkbox" name="InteresesSeleccionados[]" value="teatro" id="teatro">
-                    <label for="teatro">Teatro</label>
-                </div>
-                <div class="checkbox-group">
-                    <input type="checkbox" name="InteresesSeleccionados[]" value="compras" id="compras">
-                    <label for="compras">Compras</label>
-                </div>
-            </div>
-        </div>
-       
 
 
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
 
+               </div>
+         </div>
 
-        <br />
-
-            <button type="submit" class="btn btn-primary">Guardar</button>
-
-
-    </form>
+        </form>
+    </div>
+   
 
     <script>
         const ciudadesColombia = ["Bogotá", "Medellín", "Cali", "Barranquilla", /* Agrega más ciudades aquí */];

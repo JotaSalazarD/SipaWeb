@@ -10,7 +10,7 @@
     <title>Formulario de Descripción</title>
     <style>
         /* Estilos generales */
-        body {
+        /* body {
             font-family: 'Arial', sans-serif;
             background-color: #f0f0f0;
             display: flex;
@@ -18,7 +18,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-        }
+        } */
 
         .form-container {
             background-color: #fff;
@@ -27,6 +27,8 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             padding: 20px;
             max-width: 400px;
+            margin:auto;
+            text-align:center;
         }
 
         /* Estilos para el botón de envío */
@@ -51,8 +53,8 @@
     <div class="form-container">
         <form asp-action="ProcesarClienteDescripcion" method="post">
             <h2>Por favor suministranos información sobre tu viaje?</h2>
-            <label for="descripcion">Descripción:</label>
-            <textarea name="descripcion" id="descripcion" rows="4" required></textarea>
+            <label for="descripcion" class="form-label">Descripción:</label>
+            <textarea name="descripcion" id="descripcion" rows="4" required class="form-control"></textarea>
             <button type="submit" class="btn">Enviar</button>
         </form>
     </div>
