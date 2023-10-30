@@ -1,0 +1,31 @@
+﻿@model List<SipaWeb.Models.Lugares>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lugar Recomendado</title>
+</head>
+<body>
+    <h2>Información de Lugares Recomendados</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre del Lugar</th>
+                <th>Descripción</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var lugar in Model)
+            {
+                <tr>
+                    <td>@lugar.NombreLugar</td>
+                    <td>@lugar.Descripcion</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a href="/">Volver</a>
+</body>
+</html>

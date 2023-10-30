@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using SipaWeb.Models;
+using System;
 using System.Diagnostics;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace SipaWeb.Controllers
@@ -17,19 +20,19 @@ namespace SipaWeb.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
-        //public async  Task<IActionResult> IndexAsync()
-        //{
-        //    var httpClient = _httpClientFactory.CreateClient();
-        //    var response = await httpClient.GetAsync("https://localhost:44391/api/Lugares");
+        public async Task<IActionResult> IndexAsync()
+        {
+            var httpClient = _httpClientFactory.CreateClient();
+            var response = await httpClient.GetAsync("https://localhost:44391/api/Lugares");
 
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        var lugaresData = await response.Content.ReadAsAsync<List<Lugares>>(); 
-        //        return View(lugaresData);
-        //    }
+            if (response.IsSuccessStatusCode)
+            {
+                var lugaresData = await response.Content.ReadAsAsync<List<Lugares>>();
+                return View(lugaresData);
+            }
 
-        //    return View();
-        //}
+            return View();
+        }
 
         public IActionResult Privacy()
         {
@@ -46,6 +49,10 @@ namespace SipaWeb.Controllers
             return View();
         }
 
+        public IActionResult Inicio()
+        {
+            return View();
+        }
 
 
         [HttpPost]
@@ -87,8 +94,9 @@ namespace SipaWeb.Controllers
 
                     if (response.IsSuccessStatusCode)
                     {
+
                         // La solicitud fue exitosa, puedes redirigir a una vista de confirmación
-                     //   return RedirectToAction("Confirmacion");
+                        //   return RedirectToAction("Confirmacion");
                     }
                     else
                     {
@@ -106,6 +114,7 @@ namespace SipaWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> ProcesarClienteDescripcion(Clientes viewModel)
         {
+
             if (ModelState.IsValid)
             {
                 // Crear una nueva instancia de la entidad Clientes y asignar valores desde el ViewModel
@@ -126,6 +135,31 @@ namespace SipaWeb.Controllers
 
                     if (response.IsSuccessStatusCode)
                     {
+                        string objetoSerializado = Newtonsoft.Json.JsonConvert.SerializeObject(cliente);
+                        var apiRecomendacion = "http://127.0.0.1:5000/obtener_objeto_de_api_externa";
+                        string urlConParametro = $"{apiRecomendacion}?parametro={objetoSerializado}";
+                       
+                        var responseRecomendacion = await httpClient.GetAsync(urlConParametro);
+
+                        if (responseRecomendacion.IsSuccessStatusCode)
+                        {
+                            string responseBody = await responseRecomendacion.Content.ReadAsStringAsync();
+
+
+                            if (responseBody.StartsWith("["))
+                            {
+                                var objetosRecibidos = JsonConvert.DeserializeObject<List<Lugares>>(responseBody);
+                                return View("LugarRecomendado", objetosRecibidos);
+                                // Trabajar con la lista de objetos
+                            }
+                            else
+                            {
+                                var objetosRecibido = JsonConvert.DeserializeObject<Lugares>(responseBody);
+                                return View("LugarRecomendado", objetosRecibido);
+                                // Trabajar con el objeto individual
+                            }
+                        }
+
                         // La solicitud fue exitosa, puedes redirigir a una vista de confirmación
                         //   return RedirectToAction("Confirmacion");
                     }
@@ -138,7 +172,7 @@ namespace SipaWeb.Controllers
             }
 
             // Si la validación falla, vuelve a mostrar el formulario con errores
-            return View(viewModel);
+            return View();
         }
 
 
@@ -147,5 +181,7 @@ namespace SipaWeb.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+
     }
 }
