@@ -16,3 +16,218 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/*Description*/
+
+.form-container {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 400px;
+    margin: auto;
+    text-align: center;
+}
+
+@media(max-width:576px) {
+    .form-container {
+        margin: 1rem!important;
+    }
+}
+
+.container-img {
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+    left: 0;
+    height: 100%;
+    top: 0;
+}
+
+.imagen {
+    width: 100%;
+    height: 100%;
+}
+
+.position-card {
+    z-index: 3;
+    position: absolute;
+    margin: auto;
+    top: 23%;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+
+/*Home*/
+.banner {
+    width: 100%;
+    background-color: #3498db;
+    color: #fff;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height:100%;
+}
+
+button {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+}
+
+    button:hover {
+        background-color: #c0392b;
+    }
+
+/*Inicio Client*/
+.container-form {
+    margin-top: 10%;
+    animation: 1s ease-out 0s 1 slideInFromLeft;
+}
+/*Fin Cliente*/
+
+/*Footer*/
+.sipa-footer {
+    z-index: 3;
+    background-color: black;
+    color: white
+}
+
+
+
+/*Test*/
+.box {
+    position: fixed;
+    top: 0;
+    transform: rotate(80deg);
+    left: 0;
+    z-index: 1;
+}
+
+.wave {
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: .4;
+    position: absolute;
+    top: 3%;
+    left: 10%;
+    background: #009695;
+    width: 1500px;
+    height: 1300px;
+    margin-left: -150px;
+    margin-top: -250px;
+    transform-origin: 50% 48%;
+    border-radius: 43%;
+    animation: drift 7000ms infinite linear;
+}
+
+@media(max-width:1100px) {
+    .wave {
+        width: 800px;
+    }
+}
+
+@media(max-width:576px) {
+    .wave {
+        width: 200px;
+    }
+}
+
+    .wave.-three {
+        animation: drift 7500ms infinite linear;
+        position: fixed;
+        background-color: #343434;
+    }
+
+    .wave.-two {
+        animation: drift 3000ms infinite linear;
+        opacity: .1;
+        background: black;
+        position: fixed;
+    }
+
+.box:after {
+    content: '';
+    display: block;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 11;
+    transform: translate3d(0, 0, 0);
+}
+
+@keyframes drift {
+    from {
+        transform: rotate(0deg);
+    }
+
+    from {
+        transform: rotate(360deg);
+    }
+}
+/*Fin Test*/
+
+
+/*Inicio Animaciones*/
+input[type=text] {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    transition: box-shadow 0.3s ease;
+}
+
+    input[type=text]:focus {
+        box-shadow: 0 0 10px rgba(0,0,0,0.25);
+    }
+
+select {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+    select:focus {
+        background-color: #e8e8e8;
+        box-shadow: 0 0 10px rgba(0,0,0,0.25);
+    }
+
+input[type=checkbox] {
+    width: 20px;
+    height: 20px;
+    background-color: #f8f8f8;
+    transition: background-color 0.3s ease;
+}
+
+    input[type=checkbox]:checked {
+        background-color: #009695;
+        transform: scale(1.2);
+    }
+
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/*Final Animaciones*/

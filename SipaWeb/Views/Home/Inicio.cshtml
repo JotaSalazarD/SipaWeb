@@ -4,48 +4,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background: url('~/images/Banner.png');
-        }
-
-
-        .banner {
-            width: 100%;
-            height: 100vh; /* 100% de la altura de la ventana */
-            background-color: #3498db;
-            color: #fff;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        button {
-            background-color: #e74c3c;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-top: 20px;
-        }
-
-            button:hover {
-                background-color: #c0392b;
-            }
-    </style>
 </head>
 <body>
-    <div class="banner">
-        <h1>SIPA</h1>
-        <button id="boton-interactivo">Siguiente</button>
-    </div>
+    <div class="container-img">
+        <div class="banner">
+            <h1>SIPA</h1>
+            <button id="boton-interactivo">Siguiente</button>
+        </div>
 
+    </div>
+    
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var botonInteractivo = document.getElementById('boton-interactivo');
@@ -56,6 +24,12 @@
             });
         });
     </script>
+
+    <div class='box'>
+        <div class='wave -one'></div>
+        <div class='wave -two'></div>
+        <div class='wave -three'></div>
+    </div>
 </body>
 </html>
 

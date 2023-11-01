@@ -20,19 +20,19 @@ namespace SipaWeb.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<IActionResult> IndexAsync()
-        {
-            var httpClient = _httpClientFactory.CreateClient();
-            var response = await httpClient.GetAsync("https://localhost:44391/api/Lugares");
+        //public async Task<IActionResult> IndexAsync()
+        //{
+        //    var httpClient = _httpClientFactory.CreateClient();
+        //    var response = await httpClient.GetAsync("https://localhost:44391/api/Lugares");
 
-            if (response.IsSuccessStatusCode)
-            {
-                var lugaresData = await response.Content.ReadAsAsync<List<Lugares>>();
-                return View(lugaresData);
-            }
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        var lugaresData = await response.Content.ReadAsAsync<List<Lugares>>();
+        //        return View(lugaresData);
+        //    }
 
-            return View();
-        }
+        //    return View();
+        //}
 
         public IActionResult Privacy()
         {
